@@ -1,0 +1,19 @@
+User:
+    - UserId
+    - Name
+    - Email
+    - Password (hash)
+
+Idea:
+    - IdeaId
+    - Title
+    - Industry
+    - Description
+    - Keywords
+    - Rating (likes - dislikes)
+
+// Records whether a user likes or dislikes an idea
+UserPreference:
+    - UserId->User.UserId
+    - IdeaId->Idea.IdeaId
+    - Preference

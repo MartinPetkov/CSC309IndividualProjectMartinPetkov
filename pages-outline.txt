@@ -1,0 +1,6 @@
+- Sign-In page
+- Sign Up page
+- Ideas Listing page
+- User Ideas page
+- Idea Details page
+- Submit Idea page
