@@ -1,19 +1,21 @@
 User:
-    - UserId
-    - Name
-    - Email
-    - Password (hash)
+    - user_id (serial, NOT NULL)
+    - first_name (text, NOT NULL)
+    - last_name (text, NOT NULL)
+    - email (text, NOT NULL)
+    - password (hash, text, NOT NULL)
 
 Idea:
-    - IdeaId
-    - Title
-    - Industry
-    - Description
-    - Keywords
-    - Rating (likes - dislikes)
+    - idea_id (serial, NOT NULL)
+    - submittor_id->User.user_id (number)
+    - title (text)
+    - industry (text)
+    - description (text)
+    - keywords (text, NOT NULL)
+    - rating (number, DEFAULT 0) (likes - dislikes)
 
 // Records whether a user likes or dislikes an idea
-UserPreference:
-    - UserId->User.UserId
-    - IdeaId->Idea.IdeaId
-    - Preference
+UserLikes:
+    - user_id->User.user_id (number)
+    - idea_id->Idea.idea_id (number)
+    - like_dislike (number in [-1,0,1])
