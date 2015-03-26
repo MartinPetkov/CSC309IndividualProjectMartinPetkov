@@ -1,0 +1,44 @@
+body {
+    background-color: #a1b5d8;
+    color: #495465;
+}
+
+.website-title a{
+    color: #f0fff0;
+    font-size: 25px;
+    font-weight: bold;
+    border-right: 5px solid black;
+}
+
+.top-bar {
+    background-color: #224348;
+    font-size: 20px;
+}
+
+.top-bar li a, ul {
+    color: #faebd7;
+}
+
+.top-bar li a:hover {
+    color: green;
+}
+
+.navbar .nav.pull-right {
+    float: right;
+    margin-right: 10px;
+}
+
+.title {
+    padding-left: 15px;
+    border-bottom: 3px ridge #ddd;
+}
+
+.title h1 {
+    font-weight: bold;
+}
+
+.main-section {
+    margin: 10px;
+    margin-left: 0px;
+    margin-top: 20px;
+}

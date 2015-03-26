@@ -1,0 +1,32 @@
+.sign-in-box {
+    background-color: white;
+
+    border: 2px ridge gray;
+    width: 300px;
+    height: 315px;
+    position: fixed;
+    left: 0; right: 0;
+    top: 0; bottom: 0;
+    margin: auto;
+
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+input {
+    margin: 5px;
+}
+
+#submit-button {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+#sign-up-link {
+    font-size: 12px;
+}

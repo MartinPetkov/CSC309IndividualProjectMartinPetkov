@@ -18,7 +18,7 @@ class User(models.Model):
 class Idea(models.Model):
     INDUSTRIES = (
         ('HEALTH', 'Health'),
-        ('TRAVEL', 'Travel'),
+        ('TRAVEL', 'Technology'),
         ('EDUCATION', 'Education'),
         ('FINANCE', 'Finance'),
         ('TRAVEL', 'Travel'),

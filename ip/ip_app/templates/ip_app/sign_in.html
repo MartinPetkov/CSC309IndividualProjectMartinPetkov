@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign In</title>
+    <meta charset="utf-8" />
+
+    <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/images/favicon.ico" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}/css/basic-template.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}/css/sign_in.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container sign-in-box">
+        <!-- Main section of the page goes here -->
+        <!-- Add vertically and horizontally centered sign in form -->
+        <h3>Sign In</h3>
+        <hr/>
+        <form name="login" action="{% url 'ip_app:login' %}" method="post">{% csrf_token %}
+            Email:<input type="text" name="email" placeholder="Email" />
+            <br/>
+            Password:<input type="password" name="password" placeholder="Password" />
+            <br/>
+            <input id="submit-button" type="submit" value="Submit" />
+        </form>
+        <a id="sign-up-link" href="{% url 'ip_app:signUp' %}">Sign Up</a>
+    </div>
+</body>
+
+</html>

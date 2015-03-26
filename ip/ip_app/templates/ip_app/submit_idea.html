@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Submit an Idea</title>
+    <meta charset="utf-8" />
+
+    <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/images/favicon.ico" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}/css/basic-template.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}/css/submit_idea.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="navbar-header website-title">
+        <a class="navbar-brand" href="{% url 'ip_app:ideasListing' %}">Individual Project</a>
+    </div>
+    <div class="top-bar collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="{% url 'ip_app:ideasListing' %}"><b>Ideas Listing</b></a>
+            </li>
+            <li>
+                <a href="{% url 'ip_app:userIdeas' %}"><b>Your Ideas</b></a>
+            </li>
+            <li>
+                <a href="{% url 'ip_app:submitIdea' %}"><b>Submit An Idea</b></a>
+            </li>
+        </ul>
+        <ul class="nav pull-right">
+            <li><a href="{% url 'ip_app:logout' %}">Logout</a></li>
+        </ul>
+    </div>
+    <div class="title"><h1>Submit An Idea</h1></div>
+    <div class="container main-section">
+        <!-- Main section of the page goes here -->
+        <!-- Put in a form -->
+    </div>
+</body>
+
+</html>
