@@ -7,7 +7,7 @@
     <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/images/favicon.ico" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{STATIC_URL}}/css/basic-template.css">
-    <link rel="stylesheet" href="{{STATIC_URL}}/css/sign_up.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}/css/sign_in.css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -19,13 +19,18 @@
         <!-- Add vertically and horizontally centered sign up form -->
         <h3>Sign Up</h3>
         <hr/>
-        <form name="login" action="{% url 'ip_app:signIn' %}" method="post">{% csrf_token %}
+        <form name="login" action="{% url 'ip_app:signUp' %}" method="post">{% csrf_token %}
             Email:<input type="text" name="email" placeholder="Email" />
             <br/>
             Password:<input type="password" name="password" placeholder="Password" />
             <br/>
+            {% if user_exists %}
+                <span id="invalid">User already exists</span>
+                <br/>
+            {% endif %}
             <input type="submit" value="Register" />
         </form>
+        <a id="sign-up-in-link" href="{% url 'ip_app:signIn' %}">Sign In</a>
     </div>
 </body>
 

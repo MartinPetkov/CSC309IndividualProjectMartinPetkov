@@ -3,7 +3,7 @@
 
     border: 2px ridge gray;
     width: 300px;
-    height: 315px;
+    height: 340px;
     position: fixed;
     left: 0; right: 0;
     top: 0; bottom: 0;
@@ -20,6 +20,7 @@
 
 input {
     margin: 5px;
+    padding-left: 5px;
 }
 
 #submit-button {
@@ -27,6 +28,16 @@ input {
     margin-bottom: 0px;
 }
 
-#sign-up-link {
+#sign-up-in-link {
     font-size: 12px;
+}
+
+#invalid {
+    color: red;
+    font-size: 15px;
+}
+
+#new-user {
+    color: green;
+    font-size: 15px;
 }

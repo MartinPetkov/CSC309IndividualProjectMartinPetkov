@@ -3,15 +3,11 @@ from django.db import models
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=30, null=False)
-    last_name = models.CharField(max_length=30, null=False)
     email = models.EmailField(max_length=254, null=False)
-    password = models.CharField(max_length=50, null=False)
+    password = models.CharField(max_length=254, null=False)
 
     def __str__(self):
         return '[user_id: ' + str(self.user_id) + \
-                '; first_name: ' + self.first_name + \
-                '; last_name: ' + self.last_name + \
                 '; email: ' + self.email + ']'
 
 
