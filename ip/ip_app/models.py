@@ -24,6 +24,7 @@ class Idea(models.Model):
 
     idea_id = models.AutoField(primary_key=True)
     submittor_id = models.ForeignKey(User)
+    submission_date = models.DateField(auto_now_add=True)
     title = models.CharField(max_length=50, null=False)
     industry = models.CharField(max_length=50, null=False, choices=INDUSTRIES)
     description = models.TextField(null=False)

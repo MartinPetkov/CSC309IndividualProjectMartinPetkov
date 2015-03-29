@@ -14,4 +14,7 @@ urlpatterns = patterns('',
     url(r'^ideaDetails/(?P<idea_id>\d+)/$', views.ideaDetails, name="ideaDetails"),
     url(r'^submitIdea/$', views.submitIdea, name="submitIdea"),
     url(r'^likeIdea/$', views.likeIdea, name="likeIdea"),
+
+    url(r'^bestkideas/$', views.bestkideas, name="bestkideas"),
+    url(r'^industryDistributionGraph/$', views.industryDistributionGraph, name="industryDistributionGraph"),
 )

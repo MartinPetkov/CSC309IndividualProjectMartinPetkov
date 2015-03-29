@@ -39,10 +39,16 @@
         {% if user_ideas %}
             {% for idea in user_ideas %}
                 <div class="row">
-                    <div class="col-xs-6 col-md-4 row-like">
-                        <!-- Like button -->
-                        <button idea-id="{{ idea.idea_id }}">
-                            <img src="{{STATIC_URL}}/images/neutral-like.png" alt="Like the idea" />
+                    <div class="col-xs-6 col-md-4 row-button row-edit">
+                        <!-- Edit button -->
+                        <button idea-id="{{ idea.idea_id }}" title="Edit idea">
+                            <img src="{{STATIC_URL}}/images/edit.png" />
+                        </button>
+                    </div>
+                    <div class="col-xs-6 col-md-4 row-button row-delete">
+                        <!-- Delete button -->
+                        <button idea-id="{{ idea.idea_id }}" title="Delete idea">
+                            <img src="{{STATIC_URL}}/images/delete.png" />
                         </button>
                     </div>
                     <a href="{% url 'ip_app:ideaDetails' idea.idea_id %}">

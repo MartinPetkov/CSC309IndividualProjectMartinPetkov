@@ -32,8 +32,12 @@
     width: 95%;
 }
 
-.row-like {
+.row-button {
     width: 5%;
+}
+
+.row-delete {
+    padding: 0px;
 }
 
 .col-md-4 {

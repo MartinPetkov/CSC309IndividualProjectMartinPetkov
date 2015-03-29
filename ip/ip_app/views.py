@@ -6,6 +6,7 @@ from django.contrib import messages
 import logging
 import hashlib
 import re
+import json
 
 from ip_app.models import *
 
@@ -48,6 +49,7 @@ def signUp(req):
 
 def logout(req):
     # Logout logic goes here
+    req.session['logged_in_user_id'] = None;
     return HttpResponseRedirect('/ip_app/')
 
 def userExists(email):
@@ -141,3 +143,28 @@ def likeIdea(req):
 
     # Returns whether the user now likes or dislikes the idea
     return HttpResponse(user_like_dislike)
+
+
+''' Part II: API Methods '''
+api_token = '3y7pSalOhxEqNm6CaMcRkOYagkLxI0x2hXkoGqx4'
+def bestkideas(req):
+    given_api_token = req.GET.get('given_api_token')
+    if given_api_token != api_token:
+        return HttpResponse("Please provide the correct API token")
+
+    k = req.GET.get('k')
+    from_date = req.GET.get('from_date')
+    to_date = req.GET.get('to_date')
+
+    best_k_ideas = (Idea.filter(submission_date__gte=from_date, submission_date__lte=to_date).order_by('-rating')[:k])
+
+    data = json.dumps(best_k_ideas)
+    return JsonResponse(data)
+
+def industryDistributionGraph(req):
+    given_api_token = req.GET.get('given_api_token')
+    if given_api_token != api_token:
+        return HttpResponse("Please provide the correct API token")
+
+    # Return the right info
+    return HttpResponse('gooby pls')
