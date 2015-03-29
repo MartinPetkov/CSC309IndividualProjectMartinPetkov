@@ -1,0 +1,2 @@
+Sample cURL request for 'bestkideas':
+curl -X GET -G -H "Content-Type: application/json" -d "api_token=3y7pSalOhxEqNm6CaMcRkOYagkLxI0x2hXkoGqx4&k=10&from_date=2000-01-01&to_date=2100-01-01" http://localhost:8000/ip_app/bestkideas/

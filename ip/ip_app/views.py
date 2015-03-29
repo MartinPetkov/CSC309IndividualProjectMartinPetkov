@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import RequestContext, loader
 from django.contrib import messages
+from django.core import serializers
 
 import logging
 import hashlib
 import re
-import json
 
 from ip_app.models import *
 
@@ -212,18 +212,19 @@ def deleteIdea(req):
 ''' Part II: API Methods '''
 api_token = '3y7pSalOhxEqNm6CaMcRkOYagkLxI0x2hXkoGqx4'
 def bestkideas(req):
-    given_api_token = req.GET.get('given_api_token')
+    given_api_token = req.GET.get('api_token')
     if given_api_token != api_token:
-        return HttpResponse("Please provide the correct API token")
+        return HttpResponse("Please provide the correct API token\n")
 
     k = req.GET.get('k')
     from_date = req.GET.get('from_date')
     to_date = req.GET.get('to_date')
 
-    best_k_ideas = (Idea.filter(submission_date__gte=from_date, submission_date__lte=to_date).order_by('-rating')[:k])
+    best_k_ideas = Idea.objects.filter(submission_date__gte=from_date, submission_date__lte=to_date).order_by('-rating')[:k]
 
-    data = json.dumps(best_k_ideas)
-    return JsonResponse(data)
+    data = serializers.serialize('json', list(best_k_ideas))
+    print data
+    return JsonResponse({'data': data})
 
 def industryDistributionGraph(req):
     given_api_token = req.GET.get('given_api_token')
