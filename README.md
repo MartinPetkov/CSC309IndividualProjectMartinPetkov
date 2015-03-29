@@ -16,6 +16,7 @@ Instructions for running:
 
 ## API Requests:
 The two API requests are:
-* /ip\_app/bestkideas/?api\_token=<api\_token>?&k=<k\_value>&from\_date=<YYYY-MM-DD>&to_date=\_<YYYY-MM-DD>/
-* /ip\_app/industryDistributionGraph/?api\_token=<api\_token>/  
+* /ip\_app/bestkideas/?api\_token=&lt;api\_token&gt;?&amp;k=&lt;k\_value&gt;&amp;from\_date=&lt;YYYY-MM-DD&gt;&amp;to_date=&lt;YYYY-MM-DD&gt;/
+* /ip\_app/industryDistributionGraph/?api\_token=&lt;api\_token&gt;/  
+
 Both API requests outlined in the instructions are GET requests that require an API token. Usually this would be secret but currently it is stored in the ip\_app/views.py file and is nothing more than a previously generate string or 40 random characters. The API request for the best k ideas in the date span returns JSON data while the one for the distribution by industries returns a URL to a world-readable Plotly bar graph. A file with sample cURL statements exists in the ip/ip\_app/ directory as an example.
