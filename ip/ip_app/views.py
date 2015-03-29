@@ -11,6 +11,9 @@ import json
 
 from ip_app.models import *
 
+import plotly.plotly as ply
+from plotly.graph_objs import *
+
 
 def signIn(req):
     if req.method == 'POST':
@@ -226,10 +229,22 @@ def bestkideas(req):
     data = serializers.serialize('json', best_k_ideas)
     return HttpResponse(data, content_type="application/json")
 
+# This method uses Plotly and returns a world-readable URL
 def industryDistributionGraph(req):
-    given_api_token = req.GET.get('given_api_token')
+    given_api_token = req.GET.get('api_token')
     if given_api_token != api_token:
         return HttpResponse("Please provide the correct API token")
 
     # Return the right info
-    return HttpResponse('gooby pls')
+    y_val_H = Idea.objects.filter(industry='H').count()
+    y_val_T = Idea.objects.filter(industry='T').count()
+    y_val_E = Idea.objects.filter(industry='E').count()
+    y_val_F = Idea.objects.filter(industry='F').count()
+    y_val_R = Idea.objects.filter(industry='R').count()
+
+    x_vals = ['Health', 'Technology', 'Education', 'Finance', 'Travel']
+    y_vals = [y_val_H, y_val_T, y_val_E, y_val_F, y_val_R]
+    data = Data([Bar(x=x_vals, y=y_vals)])
+
+    plot_url = ply.plot(data, filename='industry-distribution', auto_open=False)
+    return HttpResponse(plot_url)
