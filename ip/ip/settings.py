@@ -104,4 +104,3 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 FAVICON_PATH = STATIC_URL + 'favicon.ico'
-

@@ -21,11 +21,8 @@
     position: relative;
     display: table-cell;
     vertical-align: middle;
-}
-
-.col-md-4 button {
-    width: 30px;
-    height: 30px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .row-idea {
@@ -43,4 +40,10 @@
     display: inline-block;
     float: none;
     vertical-align: middle;
+}
+
+.like-button {
+    width: 30px;
+    height: 30px;
+    padding: 0px;
 }

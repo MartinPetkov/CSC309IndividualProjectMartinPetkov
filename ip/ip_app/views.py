@@ -109,6 +109,32 @@ def submitIdea(req):
         return render(req, 'ip_app/submit_idea.html')
 
 
-def likeIdea(req, idea_id):
+def likeIdea(req):
     logged_in_user_id = req.session.get('logged_in_user_id')
-    return HttpResponse("gooby pls")
+    logged_in_user = User.objects.get(user_id=logged_in_user_id)
+
+    user_like_dislike = -1
+    if req.method == 'POST':
+        idea_id = req.POST.get('idea_id')
+        if idea_id:
+            idea = Idea.objects.get(idea_id=idea_id)
+
+            if idea:
+                # Create an entry if it doesn't exist
+                user_like, created = UserLike.objects.get_or_create(user_id=logged_in_user, idea_id=idea, defaults={'like_dislike': 0})
+
+                if user_like.like_dislike == 1:
+                    user_like.like_dislike = 0
+                    user_like_dislike = 0
+                    idea.rating -= 1
+                else:
+                    user_like.like_dislike = 1
+                    user_like_dislike = 1
+                    idea.rating += 1
+
+                user_like.save()
+                idea.save()
+
+
+    # Returns whether the user now likes or dislikes the idea
+    return HttpResponse(user_like_dislike)

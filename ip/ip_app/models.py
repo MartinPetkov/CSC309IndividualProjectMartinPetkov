@@ -43,7 +43,7 @@ class UserLike(models.Model):
     LIKE_DISLIKE = (
         (1, 'Like'),
         (0, 'Neutral'),
-        (-1, 'Dislike'),
+        #(-1, 'Dislike'),
     )
 
     user_id = models.ForeignKey(User)
