@@ -44,9 +44,11 @@
                 <div class="row" row-id="{{ idea.idea_id }}">
                     <div class="col-xs-6 col-md-4 row-button row-edit">
                         <!-- Edit button -->
+                        <a href="{% url 'ip_app:updateIdea' idea.idea_id %}">
                         <button idea-id="{{ idea.idea_id }}" title="Edit idea" id="edit-button">
                             <img src="{{STATIC_URL}}/images/edit.png" />
                         </button>
+                        </a>
                     </div>
                     <div class="col-xs-6 col-md-4 row-button row-delete">
                         <!-- Delete button -->
@@ -62,7 +64,7 @@
                 </div>
             {% endfor %}
         {% else %}
-            <p>No user ideas are available.</p>
+            <p>You have not submitted any ideas yet.</p>
         {% endif %}
     </div>
 </body>

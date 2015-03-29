@@ -66,9 +66,12 @@ def ideasListing(req):
 
     all_user_likes = []
     for idea in all_ideas_obj:
-        ul = UserLike.objects.filter(user_id=logged_in_user, idea_id=idea).values('like_dislike')[0]
+        like_dislike = 0
+        ul = UserLike.objects.filter(user_id=logged_in_user, idea_id=idea).values('like_dislike')
+        if ul.count() > 0:
+            like_dislike = ul[0].get('like_dislike')
 
-        all_user_likes.append({'idea': idea, 'like_dislike': ul.get('like_dislike')})
+        all_user_likes.append({'idea': idea, 'like_dislike': like_dislike})
 
     return render(req, 'ip_app/ideas_listing.html', {'all_user_likes': all_user_likes})
 
@@ -81,8 +84,9 @@ def userIdeas(req):
 
 
 def ideaDetails(req, idea_id):
-    idea = Idea.objects.filter(idea_id=idea_id)
-    return render(req, 'ip_app/idea_details.html', {'idea': idea[0]})
+    idea = Idea.objects.get(idea_id=idea_id)
+    print idea.submittor_id
+    return render(req, 'ip_app/idea_details.html', {'idea': idea})
 
 
 def submitIdea(req):
@@ -112,6 +116,38 @@ def submitIdea(req):
 
     else:
         return render(req, 'ip_app/submit_idea.html')
+
+def updateIdea(req, idea_id):
+    if req.method == 'GET':
+        ideas = Idea.objects.filter(idea_id=idea_id)
+        if ideas:
+            return render(req, 'ip_app/edit_idea.html', {'idea_details': ideas[0]})
+    elif req.method == 'POST':
+        idea = Idea.objects.get(idea_id=idea_id)
+
+        # Logic for updating an idea goes here
+        idea_title = req.POST.get('title')
+        idea_industry = req.POST.get('industry')
+        idea_description = req.POST.get('description')
+        idea_keywords = re.sub(' *, *', ',', req.POST.get('keywords')).strip(',')
+
+        if not idea_title \
+            or not idea_industry \
+            or not idea_description \
+            or not idea_keywords:
+
+            return render(req, 'ip_app/edit_idea.html', {'idea_details': idea, 'field_missing': True})
+        else:
+            idea.title = idea_title
+            idea.industry = idea_industry
+            idea.description = idea_description
+            idea.keywords = idea_keywords
+            idea.save()
+
+            return render(req, 'ip_app/edit_idea.html', {'idea_details': idea, 'success_update': True})
+
+    else:
+        return render(req, 'ip_app/edit_idea.html')
 
 
 def likeIdea(req):

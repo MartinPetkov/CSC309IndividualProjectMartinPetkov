@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Idea</title>
+    <meta charset="utf-8" />
+
+    <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/images/favicon.ico" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}/css/basic-template.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}/css/edit_idea.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="navbar-header website-title">
+        <a class="navbar-brand" href="{% url 'ip_app:ideasListing' %}">Individual Project</a>
+    </div>
+    <div class="top-bar collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="{% url 'ip_app:ideasListing' %}"><b>Ideas Listing</b></a>
+            </li>
+            <li>
+                <a href="{% url 'ip_app:userIdeas' %}"><b>Your Ideas</b></a>
+            </li>
+            <li>
+                <a href="{% url 'ip_app:submitIdea' %}"><b>Submit An Idea</b></a>
+            </li>
+        </ul>
+        <ul class="nav pull-right">
+            <li><a href="{% url 'ip_app:logout' %}">Logout</a></li>
+        </ul>
+    </div>
+    <div class="title"><h1>Edit Idea</h1></div>
+    <div class="container main-section">
+        <!-- Main section of the page goes here -->
+        {% if idea_details %}
+            <form name="edit_idea" action="{% url 'ip_app:updateIdea' idea_details.idea_id %}" method="post">{% csrf_token %}
+                <label for="title">Title: </label>
+                <input id="title" type="text" name="title" maxlength="50" placeholder="Title (50 characters or less)" value="{{ idea_details.title }}" />
+                <br/>
+
+                <label for="industry">Industry: </label>
+                <select id="industry" type="text" name="industry">
+                    <option value="H" {% if idea_details.industry == 'H' %}selected{% endif %}>Health</option>
+                    <option value="T" {% if idea_details.industry == 'T' %}selected{% endif %}>Technology</option>
+                    <option value="E" {% if idea_details.industry == 'E' %}selected{% endif %}>Education</option>
+                    <option value="F" {% if idea_details.industry == 'F' %}selected{% endif %}>Finance</option>
+                    <option value="R" {% if idea_details.industry == 'R' %}selected{% endif %}>Travel</option>
+                </select>
+                <br/>
+
+                <label for="description">Description: </label>
+                <textarea id="description" type="text" name="description" placeholder="Description">{{ idea_details.description }}</textarea>
+                <br/>
+
+                <label for="keywords">Keywords: </label>
+                <input id="keywords" type="text" name="keywords" placeholder="Keywords (space or comma separated)" value="{{ idea_details.keywords }}" />
+                <br/>
+
+                {% if field_missing %}
+                    <span id="invalid">Please fill in all fields</span>
+                    <br/>
+                {% elif success_update %}
+                    <span id="success-update">Successfully updated idea</span>
+                    <br/>
+                {% endif %}
+
+                <br/>
+                <input type="submit" value="Update Idea" />
+            </form>
+        {% else %}
+            <p>No such idea</p>
+        {% endif %}
+    </div>
+</body>
+
+</html>
