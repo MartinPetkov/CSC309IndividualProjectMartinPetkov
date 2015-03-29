@@ -1,0 +1,46 @@
+.row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    border: 1px solid rgba(86,61,124,.2);
+    background-color: rgba(86,61,124,.15);
+}
+
+.main-section a {
+    color: #ffebd7;
+    text-decoration: none;
+}
+
+.main-section a:hover {
+    color: green;
+}
+
+.col-md-4 img {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.col-md-4 button {
+    width: 30px;
+    height: 30px;
+}
+
+.row-idea {
+    width: 95%;
+}
+
+.row-like {
+    width: 5%;
+}
+
+.col-md-4 {
+    margin-right: 10px;
+    font-size: 20px;
+
+    display: inline-block;
+    float: none;
+    vertical-align: middle;
+}
