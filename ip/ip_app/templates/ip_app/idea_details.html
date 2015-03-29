@@ -37,11 +37,36 @@
     <div class="container main-section">
         <!-- Main section of the page goes here -->
         {% if idea %}
-            <p>
-                Page for idea with id {{idea.idea_id}}
-            </p>
+            <h1 id="idea-title"><strong>{{idea.title}}</strong></h1>
+            <br/>
+            <table>
+                <tr>
+                    <td width="20%" ></td>
+                    <td width="80%"></td>
+                <tr>
+                <tr>
+                    <td valign="top"><strong>Submitted by:</strong></td>
+                    <td>{{idea.submittor_id.first_name}} {{idea.submittor_id.last_name}}</td>
+                </tr>
+                <tr>
+                    <td valign="top"><strong>Industry:</strong></td>
+                    <td>{{idea.get_industry_display}}</td>
+                </tr>
+                <tr>
+                    <td valign="top"><strong>Description:</strong></td>
+                    <td>{{idea.description}}</td>
+                </tr>
+                <tr>
+                    <td valign="top"><strong>Keywords:</strong></td>
+                    <td>{{idea.keywords}}</td>
+                </tr>
+                <tr>
+                    <td valign="top"><strong>Liked by:</strong></td>
+                    <td>{{idea.rating}} people</td>
+                </tr>
+            </table>
         {% else %}
-            <p>No such ideak.</p>
+            <p>No such idea.</p>
         {% endif %}
     </div>
 </body>

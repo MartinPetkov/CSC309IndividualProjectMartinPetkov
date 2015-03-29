@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{STATIC_URL}}/css/basic-template.css">
     <link rel="stylesheet" href="{{STATIC_URL}}/css/sign_in.css">
+    <link rel="stylesheet" href="{{STATIC_URL}}/css/sign_up.css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <div class="container sign-in-box">
+    <div class="container sign-up-box">
         <!-- Main section of the page goes here -->
         <!-- Add vertically and horizontally centered sign up form -->
         <h3>Sign Up</h3>
@@ -23,6 +24,10 @@
             Email:<input type="text" name="email" placeholder="Email" />
             <br/>
             Password:<input type="password" name="password" placeholder="Password" />
+            First Name:<input type="text" name="first_name" placeholder="First Name" />
+            <br/>
+            Last Name:<input type="text" name="last_name" placeholder="Last Name" />
+            <br/>
             <br/>
             {% if user_exists %}
                 <span id="invalid">User already exists</span>

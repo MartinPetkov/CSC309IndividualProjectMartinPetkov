@@ -36,7 +36,40 @@
     <div class="title"><h1>Submit An Idea</h1></div>
     <div class="container main-section">
         <!-- Main section of the page goes here -->
-        <!-- Put in a form -->
+        <form name="submit_idea" action="{% url 'ip_app:submitIdea' %}" method="post">{% csrf_token %}
+            <label for="title">Title: </label>
+            <input id="title" type="text" name="title" maxlength="50" placeholder="Title (50 characters or less)" />
+            <br/>
+
+            <label for="industry">Industry: </label>
+            <select id="industry" type="text" name="industry">
+                <option value="H">Health</option>
+                <option value="T">Technology</option>
+                <option value="E">Education</option>
+                <option value="F">Finance</option>
+                <option value="R">Travel</option>
+            </select>
+            <br/>
+
+            <label for="description">Description: </label>
+            <textarea id="description" type="text" name="description" placeholder="Description"></textarea>
+            <br/>
+
+            <label for="keywords">Keywords: </label>
+            <input id="keywords" type="text" name="keywords" placeholder="Keywords (space or comma separated)" />
+            <br/>
+
+            {% if field_missing %}
+                <span id="invalid">Please fill in all fields</span>
+                <br/>
+            {% elif success_submit %}
+                <span id="success-submit">Successfully submitted idea</span>
+                <br/>
+            {% endif %}
+
+            <br/>
+            <input type="submit" value="Submit Idea" />
+        </form>
     </div>
 </body>
 

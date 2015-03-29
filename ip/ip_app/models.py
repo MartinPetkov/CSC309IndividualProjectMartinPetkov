@@ -3,6 +3,8 @@ from django.db import models
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=50, null=False)
+    last_name = models.CharField(max_length=50, null=False)
     email = models.EmailField(max_length=254, null=False)
     password = models.CharField(max_length=254, null=False)
 
@@ -13,11 +15,11 @@ class User(models.Model):
 
 class Idea(models.Model):
     INDUSTRIES = (
-        ('HEALTH', 'Health'),
-        ('TRAVEL', 'Technology'),
-        ('EDUCATION', 'Education'),
-        ('FINANCE', 'Finance'),
-        ('TRAVEL', 'Travel'),
+        ('H', 'Health'),
+        ('T', 'Technology'),
+        ('E', 'Education'),
+        ('F', 'Finance'),
+        ('R', 'Travel'),
     )
 
     idea_id = models.AutoField(primary_key=True)

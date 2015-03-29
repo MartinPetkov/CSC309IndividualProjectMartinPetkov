@@ -1,0 +1,28 @@
+input[type="text"], textarea {
+    padding-left: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    width: 80%;
+}
+
+select {
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.main-section label {
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+    vertical-align: top;
+}
+
+#invalid {
+    color: red;
+    font-size: 15px;
+}
+
+#success-submit {
+    color: green;
+    font-size: 15px;
+}

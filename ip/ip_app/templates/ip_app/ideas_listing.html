@@ -34,14 +34,24 @@
         </ul>
     </div>
     <div class="title"><h1>Ideas Listing</h1></div>
-    <div class="container main-section">
+    <div class="container-fluid main-section">
         <!-- Main section of the page goes here -->
         {% if all_ideas %}
-            <ul>
-                {% for idea in all_ideas %}
-                    <li><a href="{% url 'ip_app:ideaDetails' idea.idea_id %}">{{ idea.title }}</a></li>
-                {% endfor %}
-            </ul>
+            {% for idea in all_ideas %}
+                <div class="row">
+                    <div class="col-xs-6 col-md-4 row-like">
+                        <!-- Like button -->
+                        <button idea-id="{{ idea.idea_id }}">
+                            <img src="{{STATIC_URL}}/images/neutral-like.png" alt="Like the idea" />
+                        </button>
+                    </div>
+                    <a href="{% url 'ip_app:ideaDetails' idea.idea_id %}">
+                        <div class="col-xs-6 col-md-4 idea-row">
+                            {{ idea.title }}
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
         {% else %}
             <p>No ideas are available.</p>
         {% endif %}

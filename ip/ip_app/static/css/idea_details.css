@@ -1,0 +1,19 @@
+.main-section {
+    font-size: 20px;
+}
+
+table {
+    width: 100%;
+}
+
+tr > td {
+    padding-bottom: 10px;
+}
+
+tr {
+    width: 100%;
+}
+
+#idea-title {
+    color: purple;
+}

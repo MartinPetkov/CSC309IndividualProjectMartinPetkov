@@ -5,6 +5,7 @@ from django.contrib import messages
 
 import logging
 import hashlib
+import re
 
 from ip_app.models import *
 
@@ -29,11 +30,13 @@ def signUp(req):
         # Sign Up logic goes here
         user_email = req.POST.get('email')
         user_password_hash = hashlib.sha224(req.POST.get('password')).hexdigest()
+        user_first_name = req.POST.get('first_name')
+        user_last_name = req.POST.get('last_name')
 
         if(userExists(user_email)):
             return render(req, 'ip_app/sign_up.html', {'user_exists': True})
         else:
-            u = User(email=user_email, password=user_password_hash)
+            u = User(email=user_email, password=user_password_hash, first_name=user_first_name, last_name=user_last_name)
             u.save()
             messages.success(req, 'Account created!')
             return redirect('ip_app:signIn', permanent=True)
@@ -78,4 +81,34 @@ def ideaDetails(req, idea_id):
 
 
 def submitIdea(req):
-    return render(req, 'ip_app/submit_idea.html')
+    if req.method == 'POST':
+        # Logic for submitting an idea goes here
+        idea_submittor_id = req.session.get('logged_in_user_id')
+        idea_submittor = User.objects.get(user_id=idea_submittor_id)
+
+        idea_title = req.POST.get('title')
+        idea_industry = req.POST.get('industry')
+        idea_description = req.POST.get('description')
+        idea_keywords = re.sub(' *, *', ',', req.POST.get('keywords')).strip(',')
+        idea_rating = 0
+
+        if not idea_submittor_id \
+            or not idea_title \
+            or not idea_industry \
+            or not idea_description \
+            or not idea_keywords:
+
+            return render(req, 'ip_app/submit_idea.html', {'field_missing': True})
+        else:
+            idea = Idea(submittor_id=idea_submittor, title=idea_title, industry=idea_industry, description=idea_description, keywords=idea_keywords, rating=idea_rating)
+            idea.save()
+
+            return render(req, 'ip_app/submit_idea.html', {'success_submit': True})
+
+    else:
+        return render(req, 'ip_app/submit_idea.html')
+
+
+def likeIdea(req, idea_id):
+    logged_in_user_id = req.session.get('logged_in_user_id')
+    return HttpResponse("gooby pls")
