@@ -7,6 +7,7 @@ from django.core import serializers
 import logging
 import hashlib
 import re
+import json
 
 from ip_app.models import *
 
@@ -222,9 +223,8 @@ def bestkideas(req):
 
     best_k_ideas = Idea.objects.filter(submission_date__gte=from_date, submission_date__lte=to_date).order_by('-rating')[:k]
 
-    data = serializers.serialize('json', list(best_k_ideas))
-    print data
-    return JsonResponse({'data': data})
+    data = serializers.serialize('json', best_k_ideas)
+    return HttpResponse(data, content_type="application/json")
 
 def industryDistributionGraph(req):
     given_api_token = req.GET.get('given_api_token')
