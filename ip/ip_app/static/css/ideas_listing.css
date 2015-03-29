@@ -47,3 +47,15 @@
     height: 30px;
     padding: 0px;
 }
+
+label, input, select {
+    display: inline-block;
+}
+
+label {
+    width: 80px;
+}
+
+input[type="text"] {
+    width: 80%;
+}

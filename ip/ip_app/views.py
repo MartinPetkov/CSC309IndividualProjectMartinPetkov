@@ -62,7 +62,24 @@ def validateCredentials(email, password_hash):
 def ideasListing(req):
     logged_in_user = User.objects.get(user_id=req.session.get('logged_in_user_id'))
 
-    all_ideas_obj = Idea.objects.order_by('title')
+    all_ideas_obj = Idea.objects.all()
+
+    sort = req.GET.get('sort')
+    filter_industry = req.GET.get('filter_industry')
+    filter_keywords = req.GET.get('filter_keywords')
+
+    if filter_industry and not filter_industry == 'A':
+        all_ideas_obj = all_ideas_obj.filter(industry=filter_industry)
+
+    if filter_keywords:
+        filter_keywords_regex_pattern = '(.*' + re.sub('( *, *)|( +)', '.*|.*', filter_keywords).strip(',') + '.*)'
+        all_ideas_obj = all_ideas_obj.filter(keywords__iregex=filter_keywords_regex_pattern)
+
+    if sort and sort == 'S':
+        all_ideas_obj = all_ideas_obj.order_by('-submission_date')
+    elif sort and sort == 'T':
+        all_ideas_obj = all_ideas_obj.order_by('title')
+
 
     all_user_likes = []
     for idea in all_ideas_obj:
@@ -98,7 +115,7 @@ def submitIdea(req):
         idea_title = req.POST.get('title')
         idea_industry = req.POST.get('industry')
         idea_description = req.POST.get('description')
-        idea_keywords = re.sub(' *, *', ',', req.POST.get('keywords')).strip(',')
+        idea_keywords = re.sub('( *, *)|( +)', ',', req.POST.get('keywords')).strip(',')
         idea_rating = 0
 
         if not idea_submittor_id \
@@ -129,7 +146,7 @@ def updateIdea(req, idea_id):
         idea_title = req.POST.get('title')
         idea_industry = req.POST.get('industry')
         idea_description = req.POST.get('description')
-        idea_keywords = re.sub(' *, *', ',', req.POST.get('keywords')).strip(',')
+        idea_keywords = re.sub('( *, *)|( +)', ',', req.POST.get('keywords')).strip(',')
 
         if not idea_title \
             or not idea_industry \

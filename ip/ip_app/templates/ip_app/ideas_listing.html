@@ -38,6 +38,34 @@
     <div class="title"><h1>Ideas Listing</h1></div>
     <div class="container-fluid main-section">
         <!-- Main section of the page goes here -->
+        <p><strong>Filter ideas:</strong></p>
+        <form name="filter_ideas" action="{% url 'ip_app:ideasListing' %}" method="get">{% csrf_token %}
+        <label for="sort">Sort by: </label>
+            <select id="sort" type="text" name="sort">
+                <option value="T">Title</option>
+                <option value="S">Submission date</option>
+            </select>
+            <br/>
+
+            <label for="filter_industry">Industry: </label>
+            <select id="filter_industry" type="text" name="filter_industry">
+                <option value="A">--all--</option>
+                <option value="H">Health</option>
+                <option value="T">Technology</option>
+                <option value="E">Education</option>
+                <option value="F">Finance</option>
+                <option value="R">Travel</option>
+            </select>
+            <br/>
+
+            <label for="filter_keywords">Keywords: </label>
+            <input id="filter_keywords" type="text" name="filter_keywords" placeholder="Keywords (space or comma separated)" />
+            <br/>
+
+            <br/>
+            <input type="submit" value="Filter" />
+        </form>
+        <hr/>
         {% if all_user_likes %}
             {% for userlike in all_user_likes %}
                 <div class="row">
