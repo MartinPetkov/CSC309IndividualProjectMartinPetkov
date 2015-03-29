@@ -144,6 +144,17 @@ def likeIdea(req):
     # Returns whether the user now likes or dislikes the idea
     return HttpResponse(user_like_dislike)
 
+def deleteIdea(req):
+    success_delete = False
+    if req.method == 'POST':
+        idea_id = req.POST.get('idea_id')
+        print idea_id
+        if idea_id:
+            Idea.objects.get(idea_id=idea_id).delete()
+            success_delete = True
+
+    return JsonResponse({'success_delete': success_delete})
+
 
 ''' Part II: API Methods '''
 api_token = '3y7pSalOhxEqNm6CaMcRkOYagkLxI0x2hXkoGqx4'

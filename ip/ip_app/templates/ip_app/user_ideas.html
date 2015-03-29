@@ -5,12 +5,15 @@
     <meta charset="utf-8" />
 
     <link rel="shortcut icon" type="image/png" href="{{STATIC_URL}}/images/favicon.ico" />
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{STATIC_URL}}/css/basic-template.css">
     <link rel="stylesheet" href="{{STATIC_URL}}/css/user_ideas.css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="{{STATIC_URL}}/js/user_ideas.js"></script>
 </head>
 
 <body>
@@ -38,16 +41,16 @@
         <!-- Main section of the page goes here -->
         {% if user_ideas %}
             {% for idea in user_ideas %}
-                <div class="row">
+                <div class="row" row-id="{{ idea.idea_id }}">
                     <div class="col-xs-6 col-md-4 row-button row-edit">
                         <!-- Edit button -->
-                        <button idea-id="{{ idea.idea_id }}" title="Edit idea">
+                        <button idea-id="{{ idea.idea_id }}" title="Edit idea" id="edit-button">
                             <img src="{{STATIC_URL}}/images/edit.png" />
                         </button>
                     </div>
                     <div class="col-xs-6 col-md-4 row-button row-delete">
                         <!-- Delete button -->
-                        <button idea-id="{{ idea.idea_id }}" title="Delete idea">
+                        <button idea-id="{{ idea.idea_id }}" title="Delete idea" class="delete-button">
                             <img src="{{STATIC_URL}}/images/delete.png" />
                         </button>
                     </div>

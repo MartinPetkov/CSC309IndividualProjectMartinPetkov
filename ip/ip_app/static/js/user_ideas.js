@@ -30,20 +30,17 @@ $(document).ready(function() {
         }
     });
 
-    // Code for Like button
-    $('.like-button').click(function() {
+    // Code for delete button
+    $('.delete-button').click(function() {
         var idea_id;
         idea_id = $(this).attr("idea-id");
-        this_idea_img = $(this).find("img");
-        $.post('/ip_app/likeIdea/', {'idea_id': idea_id}, function(data) {
-            var new_src;
-            if(data == 1) {
-                new_src = "/static/images/like-like.png";
-            } else {
-                new_src = "/static/images/neutral-like.png";
-            }
 
-            this_idea_img.attr("src", new_src);
+        $.post('/ip_app/deleteIdea/', {'idea_id': idea_id}, function(data) {
+            if(data.success_delete) {
+                $(".row[row-id=" + idea_id + "]").fadeOut();
+            } else {
+                alert("Cannot delete this idea");
+            }
         });
     });
 });
