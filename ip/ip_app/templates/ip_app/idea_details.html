@@ -60,10 +60,17 @@
                     <td valign="top"><strong>Keywords:</strong></td>
                     <td>{{idea.keywords}}</td>
                 </tr>
-                <tr>
-                    <td valign="top"><strong>Liked by:</strong></td>
-                    <td>{{idea.rating}} people</td>
-                </tr>
+                {% if idea.rating == 1 %}
+                    <tr>
+                        <td valign="top"><strong>Liked by:</strong></td>
+                        <td>1 person</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td valign="top"><strong>Liked by:</strong></td>
+                        <td>{{idea.rating}} people</td>
+                    </tr>
+                {% endif %}
             </table>
         {% else %}
             <p>No such idea.</p>

@@ -58,14 +58,17 @@ def validateCredentials(email, password_hash):
 
 
 def ideasListing(req):
-    response = {}
+    logged_in_user = User.objects.get(user_id=req.session.get('logged_in_user_id'))
 
-    all_ideas = Idea.objects.order_by('title')
-    results = [idea for idea in all_ideas]
-    response['results'] = results
-    response['message'] = 'Successfully retrieved ideas listing'
+    all_ideas_obj = Idea.objects.order_by('title')
 
-    return render(req, 'ip_app/ideas_listing.html', {'all_ideas': all_ideas})
+    all_user_likes = []
+    for idea in all_ideas_obj:
+        ul = UserLike.objects.filter(user_id=logged_in_user, idea_id=idea).values('like_dislike')[0]
+
+        all_user_likes.append({'idea': idea, 'like_dislike': ul.get('like_dislike')})
+
+    return render(req, 'ip_app/ideas_listing.html', {'all_user_likes': all_user_likes})
 
 
 def userIdeas(req):
