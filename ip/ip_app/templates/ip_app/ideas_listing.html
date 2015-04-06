@@ -40,7 +40,7 @@
         <!-- Main section of the page goes here -->
         <p><strong>Filter ideas:</strong></p>
         <form name="filter_ideas" action="{% url 'ip_app:ideasListing' %}" method="get">{% csrf_token %}
-        <label for="sort">Sort by: </label>
+            <label for="sort">Sort by: </label>
             <select id="sort" type="text" name="sort">
                 <option value="T">Title</option>
                 <option value="S">Submission date</option>

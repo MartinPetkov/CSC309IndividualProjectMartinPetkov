@@ -81,7 +81,7 @@ def ideasListing(req):
 
     if sort and sort == 'S':
         all_ideas_obj = all_ideas_obj.order_by('-submission_date')
-    elif sort and sort == 'T':
+    else:
         all_ideas_obj = all_ideas_obj.order_by('title')
 
 
